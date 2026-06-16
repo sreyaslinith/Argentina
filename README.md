@@ -1,6 +1,4 @@
 # Argentina
-Here is your **complete ready-to-use `README.md` file** (copy-paste directly into your project):
-
 ```md id="r9k3x1"
 # 🇦🇷 Argentina World Champions Fan Website
 
