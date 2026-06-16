@@ -1,0 +1,408 @@
+/* ==============================
+   GLOBAL
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:black;
+    overflow:hidden;
+    color:white;
+}
+
+
+/* ==============================
+   LOADER
+================================ */
+
+.loader{
+    position:fixed;
+    inset:0;
+    background:black;
+    z-index:1000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#loader-text{
+    font-size:5rem;
+    color:white;
+    text-shadow:0 0 30px #6CB4EE;
+}
+
+.loader.hide{
+    opacity:0;
+    pointer-events:none;
+    transition:1s;
+}
+
+
+/* ==============================
+   HERO
+================================ */
+
+.hero{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    transition:1s;
+}
+
+.bg-video{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+
+    animation:zoom 20s infinite alternate;
+}
+
+
+@keyframes zoom{
+    from{
+        transform:scale(1);
+    }
+
+    to{
+        transform:scale(1.15);
+    }
+}
+
+
+.overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.7),
+        rgba(0,0,0,.4)
+    );
+}
+
+
+.hero-content{
+    position:relative;
+    z-index:5;
+
+    height:100%;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+
+.hero h1{
+    font-size:7rem;
+    letter-spacing:6px;
+
+    text-shadow:
+    0 0 30px #6CB4EE;
+}
+
+
+.hero p{
+    margin:20px;
+    font-size:1.6rem;
+}
+
+
+.click-text{
+    margin-top:50px;
+
+    color:#6CB4EE;
+
+    letter-spacing:6px;
+
+    animation:blink 1s infinite;
+}
+
+
+@keyframes blink{
+    50%{
+        opacity:.2;
+    }
+}
+
+
+
+/* ==============================
+   SQUAD PAGE
+================================ */
+
+
+.squad-page{
+    position:fixed;
+    inset:0;
+
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+
+    overflow:hidden;
+}
+
+
+/* Argentina Background */
+
+.squad-bg{
+    position:absolute;
+    inset:0;
+
+    background:
+    url("../assets/images/arg.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    transition:.5s;
+}
+
+
+.squad-overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+    rgba(0,0,0,.65);
+}
+
+
+/* Blur when card opens */
+
+.squad-page.blur .squad-bg{
+    filter:blur(12px);
+    transform:scale(1.1);
+}
+
+
+.squad-title{
+    position:relative;
+
+    z-index:5;
+
+    font-size:3rem;
+
+    margin-bottom:30px;
+
+    text-shadow:
+    0 0 20px #6CB4EE;
+}
+
+
+
+/* ==============================
+ PLAYER GRID
+================================ */
+
+
+.players{
+    position:relative;
+
+    z-index:5;
+
+    width:90%;
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:25px;
+
+    justify-items:center;
+}
+
+
+/* Cards */
+
+
+.card{
+    width:180px;
+    height:240px;
+
+    perspective:1000px;
+
+    cursor:pointer;
+
+    transition:.6s;
+}
+
+
+/* Hover glow */
+
+.card:hover{
+    transform:translateY(-15px);
+}
+
+
+.card-inner{
+    width:100%;
+    height:100%;
+
+    position:relative;
+
+    transition:.8s;
+
+    transform-style:preserve-3d;
+}
+
+
+/* Front & Back */
+
+.card-front,
+.card-back{
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    backface-visibility:hidden;
+
+    background:
+    rgba(255,255,255,.1);
+-webkit-backdrop-filter: blur(10px);
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 0 25px #6CB4EE;
+}
+
+
+.card-front img{
+    width:100%;
+    height:80%;
+
+    object-fit:cover;
+}
+
+
+.card-front h2{
+    text-align:center;
+    margin-top:8px;
+}
+
+
+.card-back{
+    transform:rotateY(180deg);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:20px;
+}
+
+
+/* Open card effect */
+
+.card.open{
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.8);
+
+    z-index:999;
+}
+
+
+.card.open .card-inner{
+    transform:rotateY(180deg);
+}
+
+
+
+/* ==============================
+ MOBILE
+================================ */
+
+
+@media(max-width:900px){
+
+    .hero h1{
+        font-size:3rem;
+    }
+
+
+    .players{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+        gap:15px;
+    }
+
+
+    .card{
+        width:140px;
+        height:190px;
+    }
+
+
+    .card.open{
+
+        transform:
+        translate(-50%,-50%)
+        scale(1.5);
+    }
+}
+/* VIDEO INSIDE CARD BACK */
+.card-back {
+    position: relative;
+    overflow: hidden;
+}
+
+/* background video */
+.card-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    opacity: 0;
+    transition: 0.6s;
+    z-index: 0;
+}
+
+/* show video only when card is open */
+.card.open .card-video {
+    opacity: 1;
+}
+
+/* content above video */
+.back-content {
+    position: relative;
+    z-index: 2;
+
+    background: rgba(0,0,0,0.4);
+    padding: 10px;
+    border-radius: 10px;
+}
